@@ -1,1 +1,72 @@
-test
+<?php
+
+$title = $this->translate('Join');
+$this->headMeta()->appendName('keywords', 'Join, Sign up, CreateAccount');
+$this->headTitle($this->escapeHtml($title));
+
+$form = $this->form;
+$form->setAttribute('action', $this->url('signup'));
+?>
+
+<div class="row justify-content-center">
+    <div class="col-sm=10 col-md-8 col-lg-5 shadow-sm">
+        <h1 class="h2 text-center mb-3">
+            <?= $this->translate('CreateAccount') ?>
+        </h1>
+
+        <?= $this->form()->openTag($form); ?>
+
+        <div class="mb-3">
+            <?= $this->formLabel($form->get('username')); ?>
+            <?= $this->formText($form->get('username')); ?>
+            <div class="invalid-feedback fw-bold">
+                <?= $this->formElementErrors($form->get('username')); ?>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <?= $this->formLabel($form->get('dob')); ?>
+            <?= $this->formText($form->get('dob')); ?>
+            <div class="invalid-feedback fw-bold">
+                <?= $this->formElementErrors($form->get('dob')); ?>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <?= $this->formLabel($form->get('email')); ?>
+            <div class="input-group">
+                <?= $this->formEmail($form->get('email')); ?>
+            </div>       
+            <div class="invalid-feedback fw-bold">
+                <?= $this->formElementErrors($form->get('email')); ?>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <?= $this->formLabel($form->get('password')); ?>
+            <?= $this->formPassword($form->get('password')); ?>
+            <div class="invalid-feedback fw-bold">
+                <?= $this->formElementErrors($form->get('password')); ?>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <?= $this->formLabel($form->get('confirmPassword')); ?>
+            <?= $this->formPassword($form->get('confirmPassword')); ?>
+            <div class="invalid-feedback fw-bold">
+                <?= $this->formElementErrors($form->get('confirmPassword')); ?>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <?= $this->formHidden($form->get('signupCsrf')); ?>
+            
+            <div class="invalid-feedback fw-bold">
+                <?= $this->formElementErrors($form->get('signupCsrf')); ?>
+            </div>
+            <?= $this->formSubmit($form->get('createAccount')); ?>
+        </div>
+
+        <?= $this->form()->closeTag(); ?>
+    </div>
+</div>

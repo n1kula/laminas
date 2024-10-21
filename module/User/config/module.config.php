@@ -6,6 +6,7 @@ namespace User;
 
 use Laminas\Router\Http\Literal;
 use Laminas\ServiceManager\Factory\InvokableFactory;
+use User\Controller\SharedControllerFactory;
 
 return [
     'router' => [
@@ -24,7 +25,7 @@ return [
     ],
     'controllers' => [
         'factories' => [
-            Controller\RegisterController::class => InvokableFactory::class,
+            Controller\RegisterController::class => SharedControllerFactory::class,
         ],
     ],
     'view_manager' => [

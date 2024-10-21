@@ -4,10 +4,13 @@ declare(strict_types=1);
 
 namespace User\Form\Register;
 
+use Laminas\Form\Element\Button;
+use Laminas\Form\Element\Csrf;
 use Laminas\Form\Element\Date;
 use Laminas\Form\Element\DateSelect;
 use Laminas\Form\Element\Email;
 use Laminas\Form\Element\Password;
+use Laminas\Form\Element\Submit;
 use Laminas\Form\Element\Text;
 use Laminas\Form\Form;
 
@@ -83,13 +86,13 @@ class RegisterForm extends Form
                 ],
             ],
             'attributes' => [
-                'required' => true,
+                'required' => true
             ]
         ]);
 
         $this->add([
                 'type' => Password::class,
-                'name' => 'Password',
+                'name' => 'password',
                 'options' => [
                     'label' => 'password',
                     'label-attributes' => [
@@ -97,10 +100,57 @@ class RegisterForm extends Form
                     ],
                 ],
                 'attributes' => [
+                    'required' => true,
+                    'minlength' => 8,
+                    'maxlength' => 25,
+                    'pattern' => '^[a-zA-Z0-9]{8-25}$',
+                    'placeholder' => 'Password',
+                    'title' => 'Enter Password',
+                    'data-bs-toggle' => 'tooltip',
+                    'data-bs-placement' => 'right',
+                    'class' => 'form-control'
+                ]
+        ]);
+
+        $this->add([
+            'type' => Password::class,
+            'name' => 'confirmPassword',
+            'options' => [
+                'label' => 'Confirm password',
+                'label-attributes' => [
+                    'class' => 'form-label'
+                ],
+            ],
+            'attributes' => [
                 'required' => true,
                 'minlength' => 8,
                 'maxlength' => 25,
                 'pattern' => '^[a-zA-Z0-9]{8-25}$',
+                'placeholder' => 'Password again',
+                'title' => 'Enter Password again',
+                'data-bs-toggle' => 'tooltip',
+                'data-bs-placement' => 'right',
+                'class' => 'form-control'
+            ]
+        ]);
+
+        $this->add([
+            'type' => Csrf::class,
+            'name' => 'signupCsrf',
+            'options' => [
+                'csrf_options' => [
+                    'timeout' => 600
+                ]
+            ]
+        ]);
+        
+        
+        $this->add([
+            'type' => Submit::class,
+            'name' => 'createAccount',
+            'attributes' => [
+                'value' => 'Sing up',
+                'class' => 'w-100 btn btn-primary btn-lg'
             ]
         ]);
     }
